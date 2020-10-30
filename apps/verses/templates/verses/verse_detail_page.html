@@ -1,0 +1,15 @@
+{% extends "senpals/base.html" %}
+
+{% block title %}{{ verse.name }}{% endblock %}
+
+{% block navbar %}{% include "senpals/navbar.html" with nav_title=verse.name %}{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row mt-5">
+            {% include 'verses/verse_info_card.html' %}
+            {% include 'verses/verse_tabs_card.html' %}
+        </div>
+    </div>
+    {% include 'verses/verse_update_modal.html' %}
+{% endblock %}

@@ -1,0 +1,38 @@
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg fixed-top navbar-transparent nav-down" color-on-scroll="100">
+    <div class="container">
+        <div class="navbar-translate">
+            <a class="navbar-brand" href="{% url 'home' %}" rel="tooltip" title="Senpals" data-placement="bottom">
+                Senpals
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-bar bar1"></span>
+                <span class="navbar-toggler-bar bar2"></span>
+                <span class="navbar-toggler-bar bar3"></span>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse" data-nav-image="../assets/img/blurred-image-1.jpg" data-color="orange">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link btn-magnify" href="{% url 'character-list' %}"><i style="font-size: 16px;" class="nc-icon nc-single-02 mr-1 align-text-top"></i> Characters</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link btn-magnify" href="{% url 'verse-list' %}"><i style="font-size: 16px;" class="nc-icon nc-planet mr-1 align-text-top"></i> Verses</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link btn-magnify" href="{% url 'thread-list' %}"><i style="font-size: 16px;" class="nc-icon nc-bullet-list-67 mr-1 align-text-top"></i> Threads</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link btn-magnify" href="{% url 'post-list' %}"><i style="font-size: 16px;" class="nc-icon nc-paper mr-1 align-text-top"></i> Posts</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link btn-magnify" href="{% url 'chat-list' %}"><i style="font-size: 16px;" class="nc-icon nc-chat-33 mr-1 align-text-top"></i> Chats</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link btn-magnify" href="{% url 'faceclaim-list' %}"><i style="font-size: 16px;" class="nc-icon nc-album-2 mr-1 align-text-top"></i> Gallery</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- End Navbar -->

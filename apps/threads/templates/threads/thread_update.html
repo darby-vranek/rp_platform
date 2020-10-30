@@ -1,0 +1,14 @@
+<form method="post" action="{% url 'thread-update' pk=thread.pk %}" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% for field in thread.get_update_form %}
+        <div class="form-group">
+            {{ field.errors }}
+            {{ field.label_tag }}
+            {{ field }}
+            <script>
+                $("#{{ field.id_for_label }}").addClass('form-control');
+            </script>
+        </div>
+    {% endfor %}
+    <input class="btn btn-primary btn-sm btn-info" type="submit" value="Submit" />
+</form>

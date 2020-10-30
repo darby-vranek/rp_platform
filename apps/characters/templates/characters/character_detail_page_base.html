@@ -1,0 +1,22 @@
+{% extends "senpals/base.html" %}
+{% load static %}
+{% block title %}{{ character.page_name }}{% endblock %}
+
+{% block navbar %}{% include "senpals/navbar.html" with nav_title=character.page_name %}{% endblock %}
+
+{% block links %}
+    <script src="{% static 'senpals/assets/js/plugins/bootstrap-tagsinput.js' %}"></script>
+    <script src='{% static "senpals/assets/js/plugins/jquery.dataTables.min.js" %}'></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'summernote/summernote.css' %}" />
+    <script src="{% static 'summernote/summernote.min.js' %}"></script>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row mt-5">
+        {% include 'characters/character_info_card.html' %}
+        {% include 'characters/character_detail_card.html' %}
+    </div>
+</div>
+{% include 'characters/character_info_update_modal.html' %}
+{% endblock %}

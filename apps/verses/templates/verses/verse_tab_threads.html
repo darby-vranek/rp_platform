@@ -1,0 +1,30 @@
+<div class="tab-pane" id="threads">
+    <div class="tab-pane" id="posts">
+        {% if verse.threads.count > 0 %}
+            {% for thread in verse.threads.all %}
+                {% with first=thread.replies.first %}
+                <div class="card-body">
+                    <h2 class="card-title"><a href="{% url 'thread-detail' pk=thread.pk %}">{{ thread.title }}</a></h2>
+                    <h6 class="card-subtitle mb-2 mt-0">
+                        {% for character in thread.get_characters %}
+                            <a href="{% url 'character-detail' page_name=character.page_name %}">{{ character.page_name }}</a>
+                            {% if character != thread.get_characters|last %}
+                                &
+                            {% endif %}
+                        {% endfor %}
+                    </h6>
+                    <hr class="mt-0 ml-3 mr-3">
+                    {% if thread.caption|length > 0 %}
+                        {{ thread.caption }}
+                    {% else %}
+                        {{ thread.replies.first.text|safe|truncatechars_html:255 }}
+                    {% endif %}
+                    <h6 class="card-subtitle mb-3 text-right"><a href="{% url 'thread-detail' pk=thread.pk %}">Read Thread</a></h6>
+                </div>
+                {% endwith %}
+            {% endfor %}
+        {% else %}
+            <p class="mt-2"><em>No threads found.</em></p>
+        {% endif %}
+    </div>
+</div>

@@ -1,0 +1,19 @@
+{% extends "senpals/base.html" %}
+
+{% block title %}Users{% endblock %}
+
+{% block body %}
+    <h1>users // <a href="{% url 'home' %}">home</a></h1>
+    <table>
+        <tr>
+            <th>Username</th>
+            <th>Is Staff</th>
+        </tr>
+        {% for user in users %}
+        <tr>
+            <td><a href="{% url 'user-profile' username=user.username %}">{{ user.username }}</a></td>
+            <td>{{ user.is_staff }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

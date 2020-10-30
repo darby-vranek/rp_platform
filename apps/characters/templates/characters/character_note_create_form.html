@@ -1,0 +1,39 @@
+{% with form=character.get_note_form %}
+    <div class="ml-3 mr-3">
+        <form method="post" enctype="multipart/form-data" action="{% url 'character-note-create' page_name=character.page_name %}">
+            {% csrf_token %}
+            <input type="hidden" id="{{ form.character.id_for_label }}" name="{{ form.character.html_name }}" value="{{ character.pk }}" />
+            <div class="form-group">
+                {{ form.verse.errors }}
+                <label for="{{ form.verse.id_for_label }}">Verse:</label>
+                {{ form.verse }}
+            </div>
+            <div class="form-group">
+                {{ form.text.errors }}
+                <label for="summernote">Text:</label>
+                <textarea id="summernote" name="{{ form.text.html_name }}"></textarea>
+                <hr>
+            </div>
+            <div class="form-group">
+                {{ form.tags.errors }}
+                <label for="{{ form.tags.id_for_label }}">Tags:</label>
+                <input type="text" placeholder="#" class="tagsinput form-control" data-role="tagsinput" data-color="info" id="{{ form.tags.id_for_label }}" name="{{ form.tags.html_name }}" />
+            </div>
+            <div class="form-group">
+                <input class="btn btn-primary btn-sm" type="submit" />
+            </div>
+        </form>
+    </div>
+    <script>
+        $(document).ready(function() {
+            $('#summernote').summernote({
+                airMode: true,
+                popover: {
+                    air: [
+                        ['font', ['bold', 'italic', 'underline', 'clear']],
+                    ]
+                },
+            });
+        });
+    </script>
+{% endwith %}

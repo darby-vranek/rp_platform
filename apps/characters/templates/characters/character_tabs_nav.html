@@ -1,0 +1,21 @@
+<div class="card-header card-header-primary">
+    <div class="nav-tabs-wrapper">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link {{ active_desc }}" href="{% url 'character-detail' page_name=character.page_name %}"><i class="material-icons">face</i>  Description</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ active_traits }}" href="{% url 'character-detail-traits' page_name=character.page_name %}"><i class="material-icons">assignment_ind</i> Traits</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ active_notes }}" href="{% url 'character-detail-notes' page_name=character.page_name %}"><i class="material-icons">notes</i>  Notes</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ active_posts }}" href="{% url 'character-detail-posts' page_name=character.page_name %}"><i class="material-icons">description</i>  Posts</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ active_threads }}" href="{% url 'character-detail-threads' page_name=character.page_name %}" ><i class="material-icons">list</i> Threads</a>
+            </li>
+        </ul>
+    </div>
+</div>

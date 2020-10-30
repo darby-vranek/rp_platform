@@ -1,0 +1,11 @@
+{% extends "senpals/base.html" %}
+{% load static %}
+{% block title %}Upload Icons{% endblock %}
+{% block navbar %}{% include "senpals/navbar.html" with nav_title="Upload Icons"%}{% endblock %}
+{% block body %}
+    <div class="card col-md-8 col-lg-6 ml-auto mr-auto" style="margin-top: 75px;">
+        <div class="card-body">
+            {% include 'icons/icon_create_form.html' %}
+        </div>
+    </div>
+{% endblock %}

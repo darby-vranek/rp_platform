@@ -1,0 +1,17 @@
+<div class="card col-lg-9 ml-auto mr-auto mt-4">
+    {% if post.character %}
+        <div class="card-header card-header-primary">
+            <h3 class="card-title"><a href="{% url 'post-detail' pk=post.pk %}">{{ post.title }}</a></h3>
+        </div>
+    {% endif %}
+    <div class="card-body pb-0">
+        <h6 class="card-subtitle mb-2 mt-2">{% if post.character %}<a href="{% url 'character-detail' page_name=post.character.page_name %}">{{ post.character.page_name }}</a>, {% endif %}written by <a href="{% url 'user-profile' username=post.user.username %}">{{ post.user.username }}</a> // {% if post.verse %}<a href="{% url 'verse-detail' pk=post.verse.pk %}">{{ post.verse.name }}</a>{% endif %}</h6>
+
+        {{ post.text|safe|truncatechars_html:500 }}
+        {% if post.text|length > 500 %}<h6 class="card-subtitle mb-3 float-right"><a href="{% url 'post-detail' pk=post.pk %}">Read More</a></h6>{% endif %}
+    </div>
+    <hr class="m-0" />
+    <div class="card-footer">
+        <div class="stats"><em><i class="material-icons">access_time</i> {{ post.created }}</em></div>
+    </div>
+</div>

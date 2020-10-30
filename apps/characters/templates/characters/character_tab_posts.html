@@ -1,0 +1,18 @@
+<div class="tab-pane active" id="posts">
+    <div>
+        {% if character.posts.count > 0 %}
+            {% for post in character.posts.all %}
+                <div class="card-body">
+                    <h2 class="card-title"><a href="{% url 'post-detail' pk=post.pk %}">{{ post.title }}</a></h2>
+                    <hr class="mt-0 ml-3 mr-3">
+                    {% if post.verse %}<h6 class="card-subtitle mt-2 mb-2"><a href="{% url 'verse-detail' pk=post.verse.pk %}">{{ post.verse.name }}</a></h6>{% endif %}
+                    {{ post.text|safe|truncatechars_html:500 }}
+                    {% if post.text|length > 500 %}<h6 class="card-subtitle mb-3 float-right"><a href="{% url 'post-detail' pk=post.pk %}">Read More</a></h6>{% endif %}
+                </div>
+            {% endfor %}
+        {% else %}
+            <p class="mt-2"><em>No posts found.</em></p>
+        {% endif %}
+    </div>
+</div>
+

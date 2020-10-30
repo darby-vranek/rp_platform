@@ -1,0 +1,13 @@
+<div class="media mb-3">
+    {% if line.icon %}
+        <img src="{{ line.icon }}" class="mr-3" alt="" width="100" style="border-radius: 5px; box-shadow: 2px 2px .2em rgba(0, 0, 0, .35);">
+{#    {% else %}#}
+{#        <img class="mr-3" width="100" style="min-width:100px;">#}
+    {% endif %}
+    <div class="media-body mt-0">
+        <h6 class="mb-0"><a href="{% url 'character-detail' page_name=line.character.page_name %}">{{ line.character.page_name }}</a>:</h6>
+        <div class="card-plain pt-0 pb-0 mt-1 mb-0">
+            <div class="pl-3" style="border-left: 2px solid lightgray;">{{ line.text|safe }}</div>
+        </div>
+    </div>
+</div>

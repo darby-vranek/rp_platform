@@ -1,0 +1,20 @@
+<div class="row">
+  <div class="mr-3">
+    <img src="{{ reply.character.icon }}" alt="" class="img-circle img-no-padding  mt-2" style="max-height:100px; max-width:100px;">
+  </div>
+  <div class="col card">
+    <div class="card-body">
+        {% if user == reply.character.user %}
+            <p class="pull-right mt-0">
+                <a href="{% url 'reply-update' thread_pk=thread.pk pk=reply.pk %}" class="btn btn-outline-info btn-just-icon btn-magnify btn-round"><i class="fa fa-pencil align-top"></i></a>
+                <a href="" class="btn btn-outline-danger btn-just-icon btn-magnify btn-round"><i class="fa fa-trash align-top"></i></a>
+            </p>
+        {% endif %}
+        <h4 class="card-title"><a href="{% url 'character-detail' page_name=reply.character.page_name %}">{{ reply.character.page_name }}</a></h4>
+        <h6 class="card-subtitle">{{ reply.created }}</h6>
+        <hr class="mt-1 mb-2" />
+        <div class="reply-text" style="font-family: Helvetica;">{{ reply.text|safe }}</div>
+    </div>
+  </div>
+</div>
+

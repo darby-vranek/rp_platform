@@ -1,0 +1,7 @@
+<tr>
+    <td><small><strong><a href="{% url 'chat-detail' pk=chat.pk %}">{{ chat.title }}</a></strong></small></td>
+    <td data-order="{{ chat.updated|date:'ymdhi' }}"><small>{{ chat.updated|date:'m/d/y, h:i a' }}</small></td>
+    <td data-order="{{ chat.created|date:'ymdhi' }}"><small>{{ chat.created|date:'m/d/y, h:i a' }}</small></td>
+    <td>{% if chat.verse %}<small><a href="{% url 'verse-detail' pk=chat.verse.pk %}">{{ chat.verse.name }}</a></small>{% endif %}</td>
+    <td></td>
+</tr>

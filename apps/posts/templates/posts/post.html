@@ -1,0 +1,15 @@
+<div class="card col-lg-9 ml-auto mr-auto mt-4">
+    {% if post.character %}
+        <div class="card-header card-header-image">
+            <img class="img" src="{{ post.character.icon }}" style="width: 100px; height: 100px;"/>
+            <h4 class="card-title" style="margin-left: 100px;"><a class="btn btn-sm btn-primary" href="{% url 'character-detail' page_name=post.character.page_name %}">{{ post.character.page_name }}</a></h4>
+        </div>
+    {% endif %}
+    <div class="card-body pb-0">
+        {{ post.text|safe }}
+    </div>
+    <hr class="m-0" />
+    <div class="card-footer">
+        <div class="stats"><i class="material-icons mr-2">access_time</i> <em>{{ post.created }}</em></div>
+    </div>
+</div>

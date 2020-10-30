@@ -1,0 +1,7 @@
+<div class="container-fluid">
+    <div class="card-deck justify-content-center">
+        {% for character in character_list %}
+            {% include "characters/character_list_item.html" %}
+        {% endfor %}
+    </div>
+</div>

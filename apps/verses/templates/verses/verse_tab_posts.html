@@ -1,0 +1,16 @@
+<div class="tab-pane active" id="posts">
+    {% if verse.posts.count > 0 %}
+        {% for post in verse.posts.all %}
+            <div class="card-body">
+                <h2 class="card-title"><a href="{% url 'post-detail' pk=post.pk %}">{{ post.title }}</a></h2>
+                <h6 class="card-subtitle mb-2 mt-0">{% if post.character %}<a href="{% url 'character-detail' page_name=post.character.page_name %}">{{ post.character.page_name }}</a>, {% endif %}written by <a href="{% url 'user-profile' username=post.user.username %}">{{ post.user.username }}</a></h6>
+                <hr class="mt-0 ml-3 mr-3">
+                {{ post.text|safe|truncatechars_html:500 }}
+                {% if post.text|length > 500 %}<h6 class="card-subtitle mb-3 float-right"><a href="{% url 'post-detail' pk=post.pk %}">Read More</a></h6>{% endif %}
+            </div>
+        {% endfor %}
+    {% else %}
+        <p class="mt-2"><em>No posts found.</em></p>
+    {% endif %}
+</div>
+

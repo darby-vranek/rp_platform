@@ -1,0 +1,18 @@
+{% extends "senpals/base.html" %}
+
+{% block title %}{{ collection.faceclaim.name }} - {{ collection.title }}{% endblock %}
+
+{% block navbar %}
+    {% include "senpals/navbar.html" with nav_title=collection.faceclaim.name %}
+{% endblock %}
+
+
+{% block body %}
+    <h3 class="mt-4 text-center">{{ collection.title }}{% if collection.source %} <a href="{{ collection.source }}" target="_blank"><sup><i class="material-icons">launch</i></sup></a>{% endif %}</h3>
+
+    <h4 class="title text-center"><a  href="{% url 'collection-update' slug=collection.faceclaim.slug pk=collection.pk %}">Edit Collection <i class="material-icons small">edit</i></a></h4>
+    <hr>
+    {% for icon in collection.icons.all %}
+        {% include 'icons/icon_list_item.html' %}
+    {% endfor %}
+{% endblock %}

@@ -1,0 +1,11 @@
+ <form method="post" enctype="multipart/form-data">
+     {% csrf_token %}
+     {{ form.title}}
+     {{ form.source }}
+     <div><select name="icons" id="id_icons" multiple>
+         {% for icon in form.icons %}
+             {{ icon }}
+         {% endfor %}
+     </select></div>
+     <div><input type="submit" /></div>
+ </form>

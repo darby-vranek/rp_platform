@@ -1,0 +1,23 @@
+{% extends 'shared/template.html' %}
+{% block title %}Characters{% endblock %}
+
+{% block main %}
+<div class="team-4 section-image" style="background-image: url('https://www.jpl.nasa.gov/spaceimages/images/largesize/PIA14881_hires.jpg');">
+    <div class="container">
+        <div class="margin-top"></div>
+        <div class="row">
+            <div class="col-md-8 ml-auto mr-auto text-center">
+                <h2 class="title">Characters</h2>
+                <a class="btn btn-outline-info btn-magnify btn-round" href="{% url 'character-create' %}"><i class="nc-icon nc-simple-add"></i> New</a>
+                <br />
+            </div>
+        </div>
+        <div class="margin-top"></div>
+        <div class="row ml-2 mr-2 ml-md-0 md-sm-0 ml-lg-0 mr-lg-0 ml-xl-5 mr-xl-5">
+            {% for char in character_list %}
+                {% include 'wireframe/characters/subtemplates/character_list_item.html' %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

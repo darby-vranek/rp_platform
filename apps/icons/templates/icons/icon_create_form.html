@@ -1,0 +1,11 @@
+ <form method="post" enctype="multipart/form-data">
+     {% csrf_token %}
+         <div><span class="btn btn-raised btn-round btn-default btn-file">
+            <span class="fileinput-new">Choose Icons</span>
+            <input type="file" multiple name="image" id="id_image" /></span>
+        </div>
+        <div class="form-group">
+            <input name="tags" id="id_tags" type="text" class="form-control" placeholder="tags"/>
+        </div>
+        <div><input type="submit" /></div>
+ </form>

@@ -1,0 +1,52 @@
+{% extends 'shared/template.html' %}
+{% block title %}Posts{% endblock %}
+
+{% block links %}
+    <style>
+        .card-text p {
+            color: black;
+            font-weight: bolder;
+            font-size: 14px;
+            line-height: 175%;
+        }
+    </style>
+{% endblock %}
+
+{% block main %}
+{% load mathfilters %}
+    <div class="section section-image" id="cards" style="background-image: url('https://www.nasa.gov/sites/default/files/thumbnails/image/blueridge_vir_2018297_lrg.jpg')">
+        <div class="top"></div>
+        <div class="container ml-auto mr-auto" style="max-width: 992px;">
+            <div class="margin-top"></div>
+            <div class="row">
+                <div class="col-md-8 ml-auto mr-auto text-center mb-5">
+                    <h2 class="title">Posts</h2>
+                    <a class="btn btn-info btn-magnify btn-round" href="{% url 'post-create' %}"><i class="nc-icon nc-simple-add"></i> New</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    {% for post in post_list %}
+                        {% if forloop.counter0|mod:2 == 0  %}
+                            {% if post.cover %}
+                                {% include 'wireframe/posts/subtemplates/post_img_list_item.html' %}
+                            {% else %}
+                                {% include 'wireframe/posts/subtemplates/post_list_item.html' %}
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="col-12 col-md-6">
+                    {% for post in post_list %}
+                        {% if forloop.counter|mod:2 == 0  %}
+                            {% if post.cover %}
+                                {% include 'wireframe/posts/subtemplates/post_img_list_item.html' %}
+                            {% else %}
+                                {% include 'wireframe/posts/subtemplates/post_list_item.html' %}
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+{% endblock %}

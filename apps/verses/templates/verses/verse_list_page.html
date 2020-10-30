@@ -1,0 +1,13 @@
+{% extends "senpals/base.html" %}
+
+{% block title %}Verses{% endblock %}
+
+{% block navbar %}{% include "senpals/navbar.html" with nav_title="Verses" %}{% endblock %}
+
+{% block body %}
+    <div id="top" class="header text-center mt-4 mb-0 p-2">
+        <h3 class="title"> <a class href="{% url 'verse-create' %}">New Verse <i class="material-icons" style="margin-bottom: 0;">add_circle_outline</i></a></h3>
+    </div>
+    <hr>
+    {% include "verses/verse_list.html" %}
+{% endblock %}

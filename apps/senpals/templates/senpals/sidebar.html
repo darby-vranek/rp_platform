@@ -1,0 +1,51 @@
+{% load static %}
+<div class="sidebar" data-color="rose" data-background-color="black">
+    <div class="logo">
+        <a href="{% url 'home' %}" class="simple-text logo-mini">
+            <img class="align-top" src="{% static 'senpals/media/burning-book.png' %}" height="30" width="30" />
+        </a>
+        <a href="{% url 'home' %}" class="simple-text logo-normal">
+            Senpals
+        </a>
+    </div>
+    <div class="sidebar-wrapper">
+        <ul class="nav">
+            <li class="nav-item ">
+                <a class="nav-link" href="{% url 'character-list' %}">
+                    <i class="material-icons">people</i>
+                    <p>Characters</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{% url 'chat-list' %}">
+                    <i class="material-icons">forum</i>
+                    <p>Chats</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{% url 'faceclaim-list' %}">
+                    <i class="material-icons">photo_library</i>
+                    <p>Icons</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{% url 'post-list' %}">
+                    <i class="material-icons">description</i>
+                    <p>Posts</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{% url 'thread-list' %}">
+                    <i class="material-icons">view_list</i>
+                    <p>Threads</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="{% url 'verse-list' %}">
+                    <i class="material-icons">class</i>
+                    <p>Verses</p>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

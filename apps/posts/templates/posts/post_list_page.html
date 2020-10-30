@@ -1,0 +1,12 @@
+{% extends "senpals/base.html" %}
+
+{% block title %}Posts{% endblock %}
+
+{% block navbar %}{% include "senpals/navbar.html" with nav_title="Posts" %}{% endblock %}
+
+{% block body %}
+    <div id="top" class="header text-center mt-4 mb-0 p-2">
+        <h3 class="title"> <a class="mr-5" href="{% url 'post-create' %}"><i class="material-icons" style="margin-bottom: 0;">add_circle_outline</i> New</a> <a class="ml-5" href="{% url 'post-search' %}"><i class="material-icons" style="margin-bottom: 0;">search</i> Search</a></h3>
+    </div>
+    {% include "posts/post_list.html" %}
+{% endblock %}

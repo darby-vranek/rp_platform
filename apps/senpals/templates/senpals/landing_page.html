@@ -1,0 +1,14 @@
+{% extends 'senpals/base.html' %}
+
+{% block title %}Log In{% endblock %}
+{% block sidebar %}{% endblock %}
+{% block navbar %}{% endblock %}
+{% block body %}
+    <h1>senpals</h1>
+    <p>closed beta 0.1</p>
+    <form action="{% url 'login' %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Log In" />
+    </form>
+{% endblock %}

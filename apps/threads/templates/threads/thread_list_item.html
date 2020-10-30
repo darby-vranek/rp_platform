@@ -1,0 +1,7 @@
+<tr>
+    <td><small><strong><a href="{% url 'thread-detail' pk=thread.pk %}">{{ thread.title }}</a></strong></small></td>
+    <td data-order="{{ thread.get_latest_reply.created|date:'ymdhi' }}"><small>{{ thread.get_latest_reply.created|date:'m/d/y, h:i a' }} by <strong><a href="{% url 'character-detail' page_name=thread.get_latest_reply.character.page_name %}">{{ thread.get_latest_reply.character.page_name }}</a></strong></small></td>
+    <td data-order="{{ thread.created|date:'ymdhi' }}"><small>{{ thread.created|date:'m/d/y, h:i a' }}</small></td>
+    <td>{% if thread.verse %}<small><a href="{% url 'verse-detail' pk=thread.verse.pk %}">{{ thread.verse.name }}</a></small>{% endif %}</td>
+    <td><small><strong>{{ thread.replies.count }}</strong></small></td>
+</tr>

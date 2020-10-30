@@ -1,0 +1,92 @@
+{% extends 'shared/template.html' %}
+{% block title %}New Chat{% endblock %}
+
+{% block links %}
+    <script src="https://cdn.tiny.cloud/1/fly5crpyo6l2zdzqx9r05tiumexj8xmxql267k1wlrzeigwa/tinymce/5/tinymce.min.js"></script>
+    <script>
+      tinymce.init({
+          selector: '#{{ form.text.id_for_label }}',
+          menubar: false,
+          toolbar: 'styleselect | forecolor | bold italic underline strikethrough | image | hr removeformat',
+          plugins: 'image hr',
+      });
+    </script>
+{% endblock %}
+
+
+{% block main %}
+    <form id="chatForm" method="post">
+    <div id="pageHeader" class="page-header page-header-small" data-parallax="true">
+        <div class="filter"></div>
+        <div class="content-center mt-5 pb-5">
+            <div class="motto pt-5 pb-5">
+                {% csrf_token %}
+                <div class="form-group">
+                    {{ form.title.errors }}
+                    {{ form.title.label_tag }}
+                    {{ form.title }}
+                </div>
+                <div class="form-group">
+                    {{ form.verse.errors }}
+                    {{ form.verse.label_tag }}
+                    {{ form.cover }}
+                </div>
+                <div class="form-group">
+                    {{ form.cover.errors }}
+                    {{ form.cover.label_tag }}
+                    {{ form.cover }}
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="main">
+        <div class="wrapper">
+            <div class="profile-content section section-gray">
+                <div class="container col-6">
+                    <div class="row">
+                        <div class="form-group">
+                            {{ form.characters.errors }}
+                            {{ form.characters.label_tag }}
+                            {{ form.characters }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="media mb-0" style="border:none;">
+                            <img src="https://epicattorneymarketing.com/wp-content/uploads/2016/07/Headshot-Placeholder-1.png" alt="" id="newIcon" class="mr-3 mt-2" width="100" style="min-width:100px; border-radius: 5px; box-shadow: 2px 2px .2em rgba(0, 0, 0, .35);">
+                                <div class="media-body mt-0">
+                                    <div class="form-group mt-0">
+                                        {{ form.character.errors }}
+                                        <select name="{{ form.character.html_name }}" id="{{ form.character.id_for_label }}" class="form-control selectpicker mt-1" data-style="btn btn-sm btn-primary text-white" title="Character">
+                                            {% for character in user.characters.all %}
+                                                <option value="{{ character.pk }}">{{ character.page_name }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                    <div class="form-group pb-0 mt-0"><input name="{{ line_form.icon.html_name }}" id="{{ line_form.icon.id_for_label }}" type="url" class="form-control pb-0 pt-0" placeholder="Icon URL (optional)"/></div>
+                                </div>
+                        </div>
+                    </div>
+                    <div class="form-group mt-0 p-1" style="border: 1px solid lightgray; border-radius: 5px;">
+                        {{ form.text.errors }}
+{#                        {{ form.text.label_tag }}#}
+                        <textarea name="{{ form.text.html_name }}" id="{{ form.text.id_for_label }}" class="form-control" rows="3"></textarea>
+                    </div>
+                    <div class="row text-center ml-auto mr-auto">
+                        <input class="ml-auto mr-auto btn btn-small btn-primary" type="submit" value="submit" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </form>
+    <script>
+        $("#{{ form.cover.id_for_label }}").change(function() {
+            if ($(this).val()) {
+                $("#pageHeader").attr('style', `background-image: url('${$(this).val()}'); background-position: top;`);
+            } else {
+                $("#pageHeader").attr('style', `background-image: url(''); background-position: top;`);
+            }
+        });
+    </script>
+{% endblock %}

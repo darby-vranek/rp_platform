@@ -1,0 +1,18 @@
+{% extends "senpals/base.html" %}
+{% load static %}
+
+{% block links %}
+    <script src='{% static "senpals/assets/js/plugins/jquery.dataTables.min.js" %}'></script>
+{% endblock %}
+
+{% block title %}Chats{% endblock %}
+
+{% block navbar %}{% include "senpals/navbar.html" with nav_title="Chats" %}{% endblock %}
+
+{% block body %}
+    <div id="top" class="header text-center mt-4 mb-0 p-2">
+        <h3 class="title"> <a class href="{% url 'chat-create' %}">New Chat <i class="material-icons" style="margin-bottom: 0;">add_circle_outline</i></a></h3>
+    </div>
+    <hr>
+    {% include 'wireframe/chats/subtemplates/chat_list.html' %}
+{% endblock %}

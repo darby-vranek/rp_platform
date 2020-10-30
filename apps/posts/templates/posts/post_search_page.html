@@ -1,0 +1,13 @@
+{% extends "senpals/base.html" %}
+
+{% block links %}
+
+{% endblock %}
+
+{% block title %}Search Posts{% endblock %}
+
+{% block navbar %}{% include "senpals/navbar.html" with nav_title="Search Posts" %}{% endblock %}
+
+{% block body %}
+    {% include "posts/post_table.html" %}
+{% endblock %}

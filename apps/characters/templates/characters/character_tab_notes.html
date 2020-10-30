@@ -1,0 +1,44 @@
+<div class="tab-pane active" id="notes">
+    <div id="accordion">
+        <div class="card-collapse mb-5">
+            <div class="card-header" role="tab" id="newNoteHeading">
+                <h6>
+                    <a data-toggle="collapse" href="#newNote" aria-expanded="false" aria-checked="newNote">
+                        New Note
+                        <i class="material-icons">keyboard_arrow_down</i>
+                    </a>
+                </h6>
+            </div>
+            <div id="newNote" class="collapse" role="tabpanel" aria-labelledby="newNoteHeading" data-parent="#accordion">
+                <div class="card-body">
+                    {% include 'characters/character_note_create_form.html' %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% if character.notes.count > 0 %}
+        {% for note in character.notes.all %}
+            <div class="card-body mb-0 pb-0">
+                {% if note.verse %}<h6 class="card-subtitle mt-2 mb-2"><a href="{% url 'verse-detail' pk=note.verse.pk %}">{{ note.verse.name }}</a></h6>{% endif %}
+                {{ note.text|safe }}
+            </div>
+            {% if note.tags %}
+                <div class="card-footer mt-0 justify-content-start">
+                   {% for tag in note.get_tags %}
+                        <span class="badge badge-sm badge-info mt-0 ml-1">#{{ tag }}</span>
+                    {% endfor %}
+               </div>
+            {% endif %}
+        {% endfor %}
+        <nav aria-label="Page navigation example" class="mr-1">
+            <ul class="pagination justify-content-end">
+                <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+                <li class="page-item disabled"><a class="page-link" href="#">1</a></li>
+                <li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
+            </ul>
+        </nav>
+    {% else %}
+        <p class="mt-2"><em>No notes found.</em></p>
+    {% endif %}
+</div>
+

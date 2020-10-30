@@ -1,0 +1,98 @@
+{% extends 'shared/template.html' %}
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block links %}
+    <script src="https://cdn.tiny.cloud/1/fly5crpyo6l2zdzqx9r05tiumexj8xmxql267k1wlrzeigwa/tinymce/5/tinymce.min.js"></script>
+    <script>
+      tinymce.init({
+          selector: '#{{ form.text.id_for_label }}',
+          menubar: false,
+          toolbar: 'styleselect | forecolor | bold italic underline strikethrough | image | bullist numlist | hr removeformat restoredraft',
+          plugins: 'autosave image lists hr',
+          autosave_restore_when_empty: true,
+          autosave_retention: '525600m',
+          autosave_interval: '10s',
+      });
+    </script>
+{% endblock %}
+
+
+{% block main %}
+    <form id="postForm" method="post">
+    <div id="pageHeader" class="page-header page-header-small" data-parallax="true" style="background-image: url('{{ post.cover }}'); background-position: top;">
+        <div class="filter"></div>
+        <div class="content-center mt-5 pb-5">
+            <div class="motto pt-5 pb-5">
+                {% csrf_token %}
+                <div class="form-group">
+                    {{ form.title.errors }}
+                    {{ form.title.label_tag }}
+                    {{ form.title }}
+                </div>
+                <div class="form-group">
+                    {{ form.cover.errors }}
+                    {{ form.cover.label_tag }}
+                    {{ form.cover }}
+                </div>
+                <div class="form-group">
+                    {{ form.verse.label_tag }}
+                    {{ form.verse }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main">
+        <div class="wrapper">
+            <div class="profile-content section section-gray">
+                <div class="container">
+                    <div class="row" style="margin-top: -150px;">
+                        <div class="profile-picture">
+                            <div class="fileinput fileinput-new mb-0 pb-0" data-provides="fileinput">
+                                <div class="fileinput-new img-no-padding text-center">
+                                    {% if post %}
+                                        <img id="icon" class="img-shadow" src="" alt="" style="background-color: gray; min-width: 150px; min-height:150px;">
+                                    {% else %}
+                                        <div style="min-height: 100px;"></div>
+                                    {% endif %}
+                                </div>
+                                <div class="name mt-3 mb-4">
+                                    <p class="text-center">
+                                        {{ form.character.errors }}
+                                        {{ form.character.label_tag }}
+                                        {{ form.character }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        {{ form.text.errors }}
+                        <div class="col col-md-9 col-lg-7 col-xl-6 card card-plain ml-auto mr-auto pl-0 pr-0">
+                            {{ form.text }}
+                        </div>
+                        {{ form.non_field_errors }}
+                        <div class="card no-transition ml-auto mr-auto">
+{#                            <div id="editor" style="width: 525px;">#}
+{#                                <p></p>#}
+{#                            </div>#}
+                        </div>
+                    <div class="row text-center ml-auto mr-auto">
+                        <input class="ml-auto mr-auto btn btn-small btn-primary" type="submit" value="submit" form="postForm" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </form>
+    <script>
+        $("#{{ form.cover.id_for_label }}").change(function() {
+            if ($(this).val()) {
+                $("#pageHeader").attr('style', `background-image: url('${$(this).val()}'); background-position: top;`);
+            } else {
+                $("#pageHeader").attr('style', `background-image: url(''); background-position: top;`);
+            }
+        });
+        {% if post %}
+            $('#icon').attr('src', '{{ post.character.icon }}');
+        {% endif %}
+    </script>
+{% endblock %}

@@ -1,0 +1,6 @@
+<option>...</option>
+{% if user.characters %}
+    {% for character in user.characters.all %}
+        <option value="{{ character.pk }}">{{ character.name }}</option>
+    {% endfor %}
+{% endif %}w

@@ -1,0 +1,13 @@
+{% extends "senpals/base.html" %}
+
+{% block title %}Face Claims{% endblock %}
+
+{% block navbar %}
+    {% include "senpals/navbar.html" with nav_title="Face Claims" %}
+{% endblock %}
+
+
+{% block body %}
+    <h3 class="title text-center"><a  href="{% url 'faceclaim-create' %}">New Face Claim <i class="material-icons">add_circle_outline</i></a></h3>
+    {% include "icons/face_claim_list.html" %}
+{% endblock %}

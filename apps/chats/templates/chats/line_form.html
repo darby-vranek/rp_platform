@@ -1,0 +1,29 @@
+<form action="{% url 'line-create' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="media mb-3">
+        {{ line_form.chat }}
+        {{ line_form.non_field_errors }}
+        <img src="https://epicattorneymarketing.com/wp-content/uploads/2016/07/Headshot-Placeholder-1.png" alt="" id="newIcon" class="mr-3 mt-2" width="100" style="min-width:100px; border-radius: 5px; box-shadow: 2px 2px .2em rgba(0, 0, 0, .35);">
+        <div class="media-body mt-0">
+            <div class="form-group mt-0">
+                <select name="{{ line_form.character.html_name }}" id="{{ line_form.character.id_for_label }}" class="form-control selectpicker mt-1" data-style="btn btn-sm btn-primary text-white" title="Character">
+                    {% for character in chat.characters.all %}
+                        <option value="{{ character.pk }}">{{ character.page_name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group pb-0 mt-0"><input name="{{ line_form.icon.html_name }}" id="{{ line_form.icon.id_for_label }}" type="url" class="form-control pb-0 pt-0" placeholder="Icon URL (optional)"/></div>
+        </div>
+        <script>
+                $("#{{ line_form.icon.id_for_label }}").change(function() {
+                    if ($(this).val()) {
+                        $("#newIcon").attr('src', $("#{{ line_form.icon.id_for_label }}").val());
+                    } else {
+                        $("#newIcon").attr('src', 'https://epicattorneymarketing.com/wp-content/uploads/2016/07/Headshot-Placeholder-1.png');
+                    }
+                });
+        </script>
+    </div>
+    <div class="form-group mt-0"><textarea name="{{ line_form.text.html_name }}" id="{{ line_form.text.id_for_label }}" class="form-control" rows="2"></textarea></div>
+    <input class="btn btn-sm btn-primary" style="width: 100%;" type="submit" />
+</form>

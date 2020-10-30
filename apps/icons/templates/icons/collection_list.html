@@ -1,0 +1,7 @@
+<div class="">
+    <h3>Collections ({{ faceclaim.collections.count }})</h3>
+    <hr />
+    {% for collection in faceclaim.collections.all %}
+        {% include 'icons/collection_list_item.html' %}
+    {% endfor %}
+</div>

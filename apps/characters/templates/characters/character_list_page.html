@@ -1,0 +1,14 @@
+{% extends "senpals/base.html" %}
+
+{% block title %}Characters{% endblock %}
+
+{% block navbar %}
+    {% include "senpals/navbar.html" with nav_title="Characters" %}
+{% endblock %}
+
+
+
+{% block body %}
+    <h3 class="title text-center"><a  href="{% url 'character-create' %}">New Character <i class="material-icons">add_circle_outline</i></a></h3>
+    {% include "characters/character_list.html" %}
+{% endblock %}

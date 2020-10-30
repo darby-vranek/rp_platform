@@ -1,0 +1,23 @@
+{% extends "senpals/base.html" %}
+{% block title %}New Verse{% endblock %}
+{% block navbar %}{% include "senpals/navbar.html" with nav_title="New Verse"%}{% endblock %}
+{% block body %}
+    <div class="card col-md-6 ml-auto mr-auto" style="margin-top: 75px;">
+        <div class="card-body">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {% for field in form %}
+                    <div class="form-group">
+                        {{ field.errors }}
+                        {{ field.label_tag }}
+                        {{ field }}
+                        <script>
+                            $("#{{ field.id_for_label }}").addClass('form-control');
+                        </script>
+                    </div>
+                {% endfor %}
+                <input class="btn btn-primary btn-sm btn-info" type="submit" value="Submit" />
+            </form>
+        </div>
+    </div>
+{% endblock %}

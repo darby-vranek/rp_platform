@@ -1,0 +1,16 @@
+{% extends "senpals/base.html" %}
+
+{% block title %}{{ faceclaim.name }}{% endblock %}
+
+{% block navbar %}
+    {% include "senpals/navbar.html" with nav_title=faceclaim.name %}
+{% endblock %}
+
+
+{% block body %}
+    <h3 class="title text-center"><a  href="{% url 'icon-create' slug=faceclaim.slug %}">Upload <i class="material-icons">cloud_upload</i></a> / <a  href="{% url 'collection-create' slug=faceclaim.slug %}">New Collection <i class="material-icons">add_circle</i></a></h3>
+    <h3 class="title text-center"></h3>
+    <hr>
+    {% include 'icons/collection_list.html' %}
+    {% include 'icons/icon_list.html' %}
+{% endblock %}

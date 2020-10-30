@@ -1,0 +1,112 @@
+{% load static %}
+<div class="card-body">
+    <div id="accordion">
+        <div class="card-collapse mb-5">
+            <div class="card-header" role="tab" id="newTraitHeading">
+                <h6>
+                    <a data-toggle="collapse" href="#newTrait" aria-expanded="false" aria-checked="newTrait">
+                        New Trait
+                        <i class="material-icons">keyboard_arrow_down</i>
+                    </a>
+                </h6>
+            </div>
+            <div id="newTrait" class="collapse" role="tabpanel" aria-labelledby="newTraitHeading" data-parent="#accordion">
+                <div class="card-body">
+                    {% include 'characters/character_trait_create_form.html' %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="toolbar">
+    </div>
+    <div class="material-datatables ml-auto mr-auto">
+        <table id="datatables" data-page-length='25' data-order='[[ 0, "asc" ]]' class="table table-condensed table-hover" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Verse</th>
+                    <th>Trait</th>
+                    <th class="sorting_asc_disabled sorting_desc_disabled disabled"></th>
+                    <th class="sorting_asc_disabled sorting_desc_disabled disabled"></th>
+                    <th class="sorting_asc_disabled sorting_desc_disabled disabled"></th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>Verse</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </tfoot>
+            <tbody>
+                {% for trait in character.traits.all %}
+                    <tr>
+                        {% if trait.verses %}
+                            {% if trait.verses.count == 1 %}
+                                <td data-order="name">
+                            {% else %}
+                                <td data-order="">
+                            {% endif %}
+                            {% for verse in trait.verses.all|dictsort:"name" %}
+                                <p class="m-0"><span class="badge badge-sm badge-info"><a class="text-white" href="{% url 'verse-detail' pk=verse.pk %}">{{ verse.name }}</a></span></p>
+                            {% endfor %}
+                            </td>
+                        {% else %}
+                            <td></td>
+                        {% endif %}
+                        <td class="text-right align-top">
+                            <small><strong class="mr-2">{{ trait.title }}</strong></small>
+                        </td>
+                        <td class="text-left align-top">
+                            <small>{{ trait.value }}</small>
+                        </td>
+                        <td class="align-top">
+                            <a href="#"><i class="material-icons btn-sm">edit</i></a>
+                        </td>
+                        <td class="align-top">
+                            <a href="#"><i class="material-icons btn-sm">delete</i></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+<script>
+    $(document).ready(function() {
+        $('#datatables').DataTable({
+            "pagingType": "full_numbers",
+            "lengthMenu": [
+                [25, 50, 100, -1],
+                [25, 50, 100, "All"]
+            ],
+            responsive: false,
+            language: {
+                search: "_INPUT_",
+                searchPlaceholder: "Search records",
+            }
+        });
+
+        var table = $('#datatable').DataTable();
+
+        // Edit record
+        table.on('click', '.edit', function() {
+        $tr = $(this).closest('tr');
+        var data = table.row($tr).data();
+        alert('You press on Row: ' + data[0] + ' ' + data[1] + ' ' + data[2] + '\'s row.');
+        });
+
+        // Delete a record
+        table.on('click', '.remove', function(e) {
+            $tr = $(this).closest('tr');
+            table.row($tr).remove().draw();
+            e.preventDefault();
+        });
+
+        //Like record
+        table.on('click', '.like', function() {
+            alert('You clicked on Like button');
+        });
+    });
+</script>

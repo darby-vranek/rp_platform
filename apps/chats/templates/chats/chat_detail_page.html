@@ -1,0 +1,28 @@
+{% extends "senpals/base.html" %}
+{% load static %}
+
+{% block links %}
+    <link href="{% static 'summernote/summernote.css' %}" rel="stylesheet">
+    <script src="{% static 'summernote/summernote-bs4.min.js' %}"></script>
+    <script src="{% static 'senpals/assets/js/plugins/bootstrap-selectpicker.js' %}" ></script>
+{% endblock %}
+
+{% block title %}{{ chat.title }}{% endblock %}
+{% block navbar %}{% include "senpals/navbar.html" with nav_title=chat.title %}{% endblock %}
+
+
+{% block body %}
+{#    <hr class="mr-5 ml-5 pr-5 pl-5 mt-5 mb-5" />#}
+    <blockquote class="blockquote mr-5 ml-5 mt-4 text-center">
+        {{ chat.caption }}
+        {% if chat.verse %}<div><a class="badge badge-sm badge-primary" href="{% url 'verse-detail' pk=chat.verse.pk %}">{{ chat.verse.name }}</a></div>{% endif %}
+    </blockquote>
+    <div class="card card-plain col-6 ml-auto mr-auto mb-2">
+        {% for line in chat.lines.all|dictsort:'created' %}
+            {% include "chats/line.html" %}
+        {% endfor %}
+    </div>
+    <div class="card card-plain col-6 ml-auto mr-auto mt-0">
+        {% include 'chats/line_form.html' %}
+    </div>
+{% endblock %}

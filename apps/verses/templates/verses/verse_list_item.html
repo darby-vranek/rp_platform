@@ -1,0 +1,4 @@
+<tr>
+    <td><strong><a href="{% url 'verse-detail' pk=verse.pk %}">{{ verse.name }}</a></strong></td>
+    <td>{% if verse.franchise %}{{ verse.franchise }}{% endif %}</td>
+</tr>

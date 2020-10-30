@@ -1,0 +1,90 @@
+{% extends 'shared/template.html' %}
+{% block title %}{{ chat.title }}{% endblock %}
+
+{% block links %}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+<style>
+    .line p {
+        color: black;
+        font-weight: bolder;
+        font-size: 13px;
+        line-height: 22px;
+        font-family: Helvetica;
+    }
+</style>
+<script src="https://cdn.tiny.cloud/1/fly5crpyo6l2zdzqx9r05tiumexj8xmxql267k1wlrzeigwa/tinymce/5/tinymce.min.js"></script>
+<script>
+    tinymce.init({
+      selector: '#{{ line_form.text.id_for_label }}',
+      menubar: false,
+      toolbar: 'forecolor | bold italic underline strikethrough',
+    });
+    $(document).ready(function() {
+        {% for line in chat.lines.all %}
+            $("button#edit_{{ line.pk }}").click(function() {
+                tinymce.init({
+                    selector: '#text_{{ line.pk }}',
+                    inline: true,
+                    toolbar: false,
+                    menubar: false,
+                });
+                $('button#delete_{{ line.pk }}').hide();
+                $(this).hide();
+                $('button#save_{{ line.pk }}').show();
+                $('button#cancel_{{ line.pk }}').show();
+                $("#text_{{ line.pk }}").focus();
+            });
+            $('button#save_{{ line.pk }}').click(function() {
+                alert('nothing was saved, backend is not set up yet!');
+                tinymce.remove('#text_{{ line.pk }}');
+                $('button#cancel_{{ line.pk }}').hide();
+                $(this).hide();
+                $('button#edit_{{ line.pk }}').show();
+                $('button#delete_{{ line.pk }}').show();
+            });
+            $('button#cancel_{{ line.pk }}').click(function() {
+                tinymce.get('text_{{ line.pk }}').setContent(`{{ line.text|safe }}`);
+                tinymce.remove('#text_{{ line.pk }}');
+                $('button#save_{{ line.pk }}').hide();
+                $(this).hide();
+                $('button#edit_{{ line.pk }}').show();
+                $('button#delete_{{ line.pk }}').show();
+            });
+        {% endfor %}
+    });
+</script>
+{% endblock %}
+
+
+{% block main %}
+    <div class="page-header page-header-small" data-parallax="true" style="background-image: url('{{ chat.cover }}');">
+        <div class="filter"></div>
+        <div class="content-center">
+            <div class="motto">
+                <h1 class="title-uppercase text-center">{{ chat.title }}
+                    {% if chat.user == user %}
+                        <button class="btn btn-info btn-just-icon btn-rotate btn-round mb-2">
+                            <i class="nc-icon nc-settings-gear-65"></i>
+                        </button>
+                    {% endif %}
+                </h1>
+                <h6 class="mt-2 mb-3">{% for char in chat.characters.all %}<a class="mr-2 ml-2 text-white font-weight-bold" href="{% url 'character-detail' page_name=char.page_name %}">{{ char.page_name }}</a>{% endfor %}</h6>
+                {% if chat.verse %}<h3 class="text-center mt-2" ><a class="text-white btn btn-sm btn-info btn-round" href="{% url 'verse-detail' pk=chat.verse.pk %}">{{ chat.verse.name }}</a></h3>{% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="wrapper">
+        <div class="card col-11 col-sm-8 col-md-7 col-lg-6 col-xl-5 card-plain ml-auto mr-auto mb-2">
+            {% for line in chat.lines.all|dictsort:'created' %}
+                {% include "wireframe/chats/subtemplates/line.html" %}
+            {% endfor %}
+        </div>
+        <div class="card col-11 col-sm-8 col-md-7 col-lg-6 col-xl-5 card-plain ml-auto mr-auto mb-2">
+            {% include 'wireframe/chats/subtemplates/line_form.html' %}
+        </div>
+    </div>
+    {% include 'shared/subtemplates/confirm_delete_modal.html' with destination='chat-delete' pk=chat.pk %}
+    <script>
+
+    </script>
+{% endblock %}

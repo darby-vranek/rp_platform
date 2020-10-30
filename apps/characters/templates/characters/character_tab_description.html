@@ -1,0 +1,11 @@
+<div class="tab-pane active" id="description">
+    <h3 class="title text-center"><a href="#" data-toggle="modal" data-target="#descriptionModal">Edit Description <i class="material-icons">edit</i></a></h3>
+    <hr class="mb-0">
+    {% if character.description|length > 0 %}
+        <div class="p-4 ">
+            {{ character.description|safe }}
+        </div>
+    {% else %}
+        <p class="mt-4"><em>No description found.</em></p>
+    {% endif %}
+</div>

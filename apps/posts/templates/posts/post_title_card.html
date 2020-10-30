@@ -1,0 +1,9 @@
+<div class="card-plain col-sm ml-auto mt-0 pr-sm-0 pr-lg-2 pt-lg-1 mr-lg-2">
+    <div class="card-body text-right">
+        <h3 class="card-title mb-0 mt-0"><em>{{ post.title }}</em></h3>
+        {% if post.verse %}<a href="{% url 'verse-detail' pk=post.verse.pk %}"><span class="badge badge-primary">{{ post.verse.name }}</span></a>{% endif %}
+        {% if post.user == user %}
+            <p class="mt-1"><a href="{% url 'post-update' pk=post.pk %}"><i class="material-icons mr-1 align-middle text-secondary" style="font-size: 20px;">edit</i></a><a data-toggle="modal" data-target="#confirmDeleteModal"><i class="material-icons align-middle text-secondary" style="font-size: 20px;">delete</i></a></p>
+        {% endif %}
+    </div>
+</div>

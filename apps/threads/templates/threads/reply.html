@@ -1,0 +1,17 @@
+<div class="card col-md-10 col-xl-8 ml-auto mr-auto mt-5 mb-5 pl-4 pr-4">
+    <div class="card-header card-header-image">
+        <img class="img" src="{{ reply.character.icon }}" style="width: 100px; height: 100px;"/>
+        <h4 class="card-title" style="margin-left: 100px;"><a class="btn btn-sm btn-primary" href="{% url 'character-detail' page_name=reply.character.page_name %}">{{ reply.character.page_name }}</a></h4>
+    </div>
+    <div class="card-body" id="reply_{{ reply.pk }}">
+        {{ reply.text|safe }}
+    </div>
+    <hr class="m-0" />
+    <div class="card-footer">
+        <div class="stats"><i class="material-icons mr-2">access_time</i> <em>{{ reply.created }}</em></div>
+        <div class="stats">
+            <a class="text-secondary" href="{% url 'reply-update' thread_pk=thread.pk pk=reply.pk %}"><i id="reply_{{ reply.pk }}_edit" class="material-icons align-top" >edit</i></a>
+            <a class="text-secondary" data-toggle="modal" data-target="#deleteReplyModal" data-reply="{{ reply.pk }}"><i id="reply_{{ reply.pk }}_delete" class="material-icons align-top">delete</i></a>
+        </div>
+    </div>
+</div>

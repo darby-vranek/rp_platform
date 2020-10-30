@@ -1,0 +1,54 @@
+{% extends "senpals/base.html" %}
+{% block title %}{{ title }}{% endblock %}
+{% block links %}
+    <script src="https://cdn.tiny.cloud/1/fly5crpyo6l2zdzqx9r05tiumexj8xmxql267k1wlrzeigwa/tinymce/5/tinymce.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <script>
+      tinymce.init({
+          selector: '#{{ form.text.id_for_label }}',
+          menubar: false,
+          toolbar: 'styleselect | forecolor | bold italic underline strikethrough | image | bullist numlist | hr removeformat restoredraft',
+          plugins: 'autosave image lists hr',
+          autosave_restore_when_empty: true,
+          autosave_retention: '525600m',
+      });
+    </script>
+    <style>
+        .card-body p {
+            font-family: 'Roboto';
+            line-height: 22px;
+            margin: 15px 0;
+        }
+        div.reply-text p img, div.reply-text img {
+             border-radius: 0;
+        }
+        img.note-float-left {
+            border-radius: 0;
+            margin: 5px 15px 0 0;
+        }
+        img.note-float-right {
+            border-radius: 0;
+            margin: 5px 0 0 15px;
+    }
+    </style>
+{% endblock %}
+{% block body %}
+    <div class="card">
+        <div class="card-body">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {% for field in form %}
+                    <div class="form-group">
+                        {{ field.errors }}
+                        {{ field.label_tag }}
+                        {{ field }}
+                        <script>
+                            $("#{{ field.id_for_label }}").addClass('form-control');
+                        </script>
+                    </div>
+                {% endfor %}
+                <input class="btn btn-primary btn-sm btn-info" type="submit" value="Submit" />
+            </form>
+        </div>
+    </div>
+{% endblock %}

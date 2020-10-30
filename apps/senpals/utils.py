@@ -1,0 +1,4 @@
+
+
+def DeltaHtml(delta):
+    pass

@@ -1,0 +1,24 @@
+<div class="row">
+  <div class="col-auto">
+    <img src="https://epicattorneymarketing.com/wp-content/uploads/2016/07/Headshot-Placeholder-1.png" alt="" class="img-circle img-no-padding  mt-2" style="max-height:100px; max-width:100px;">
+  </div>
+  <div class="col card mr-3 ">
+    <div class="card-body">
+        <form method="post" action="{% url 'reply-create' pk=thread.pk %}">
+            {% csrf_token %}
+            <input type="hidden" id="{{ reply_form.thread.id_for_label }}" name="{{ reply_form.thread.html_name }}" value="{{ thread.pk }}" />
+            <div class="form-inline m-2">
+                <label class="card-title mr-3" for="id_character">Reply with...</label>
+                {{ reply_form.character }}
+            </div>
+            <div class="form-group mt-4">
+                {{ reply_form.text.errors }}
+                {{ reply_form.text }}
+            </div>
+            <div class="form-group">
+                <input type="submit" />
+            </div>
+        </form>
+    </div>
+  </div>
+</div>

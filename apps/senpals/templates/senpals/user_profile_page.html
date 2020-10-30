@@ -1,0 +1,16 @@
+{% extends "senpals/base.html" %}
+
+{% block title %}{{ profile.username }}{% endblock %}
+
+{% block navbar %}{% include "senpals/navbar.html" with nav_title=profile.username %}{% endblock %}
+
+{% block body %}
+    {% if profile.pk == user.pk %}
+    <p><a href="">Edit Profile</a></p>
+    {% endif %}
+    {% if profile.characters.count >= 1 %}
+        <h2 class="card-subtitle">Characters</h2>
+        <hr>
+        {% include 'characters/character_list.html' with character_list=profile.characters.all %}
+    {% endif %}
+{% endblock %}

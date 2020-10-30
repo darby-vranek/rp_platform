@@ -1,0 +1,12 @@
+<div class="card card-profile mb-4 ml-auto mr-auto ml-sm-4 mr-sm-4" style="min-width: 200px; max-width: 200px;">
+  <div class="card-header card-header-image">
+        <a href="{% url 'character-detail' page_name=character.page_name %}">
+            <img class="text-left" src="{{ character.icon }}" style="width: 100px; height: 100px;">
+        </a>
+    </div>
+    <div class="card-body">
+        <p class="card-title"><strong>{{ character.name }}</strong></p>
+        <a class="badge badge-primary" href="{% url 'character-detail' page_name=character.page_name %}">{{ character.page_name }}</a>
+        <h6 class="card-category text-gray mt-2 mb-1">{{ character.tagline }}</h6>
+    </div>
+</div>

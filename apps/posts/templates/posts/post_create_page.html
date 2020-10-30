@@ -1,0 +1,51 @@
+{% extends "senpals/base.html" %}
+{% load static %}
+{% block title %}Post{% endblock %}
+{% block links %}<script src="{% static 'senpals/assets/js/plugins/bootstrap-selectpicker.js' %}" ></script><link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">{% endblock %}
+{% block navbar %}{% include "senpals/navbar.html" with nav_title="Post"%}{% endblock %}
+{% block body %}
+    <div class="card col-md-8 ml-auto mr-auto col-xl-7">
+        <div class="card-body">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.non_field_errors }}
+                <div class="form-group">
+                    {{ form.title.errors }}
+                    <h5 class="card-title"><label for="{{ form.title.id_for_label }}">Title:</label></h5>
+                    <input type="text" class="form-control" id="{{ form.title.id_for_label }}" name="{{ form.title.html_name }}" value="{{ form.title.value }}" />
+                </div>
+                <div class="form-group">
+                    {{ form.cover.errors }}
+                    <h5 class="card-title"><label for="{{ form.cover.id_for_label }}">Cover Image:</label></h5>
+                    <input type="url" class="form-control" id="{{ form.cover.id_for_label }}" name="{{ form.cover.html_name }}" value="{{ form.cover.value }}" />
+                </div>
+                <div class="form-group">
+                    {{ form.character.errors }}
+                    <h5 class="card-title"><label for="{{ form.character.id_for_label }}">Character:</label></h5>
+                    <select class="form-control mt-4" id="{{ form.character.id_for_label }}" name="{{ form.character.html_name }}">
+                        <option>None</option>
+                        {% for character in user.characters.all %}
+                            <option value="{{ character.pk }}" {% if character.pk == form.character.value %}selected{% endif %}>{{ character.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group mt-4">
+                    {{ form.verse.errors }}
+                    <h5 class="card-title"><label for="{{ form.verse.id_for_label }}">Verse:</label></h5>
+                    <select class="form-control mt-4" id="{{ form.verse.id_for_label }}" name="{{ form.verse.html_name }}">
+                        <option>None</option>
+                        {% for verse in verses.all %}
+                            <option value="{{ verse.pk }}" {% if verse.pk == form.verse.value %}selected{% endif %}>{{ verse.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group mt-5">
+                    {{ form.text.error}}
+                    {{ form.text }}
+                </div>
+                <input class="btn btn-primary btn-sm btn-primary" type="submit" value="Submit" />
+            </form>
+        </div>
+    </div>
+{% endblock %}

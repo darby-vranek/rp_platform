@@ -1,0 +1,48 @@
+{% extends "shared/template.html" %}
+
+{% block title %}Senpals | Home{% endblock %}
+
+{% block main %}
+    <!--     *********     FEATURES 5      *********      -->
+    <div class="features-5 background-img" style="background-image: url('http://marilynscott.com/wp-content/uploads/2016/05/bokeh-dark-dust.jpg')">
+      <div class="container mt-3 pt-3 mt-md-5 pt-md-5">
+        <div class="row pt-5">
+          <div class="col-5 ml-auto">
+            <div class="info">
+              <div class="icon">
+                <i class="nc-icon nc-single-02" aria-hidden="true"></i>
+              </div>
+              <h6 class="subtitle">{{ characters }} characters</h6>
+            </div>
+          </div>
+          <div class="col-5 mr-auto">
+            <div class="info">
+              <div class="icon">
+                <i class="nc-icon nc-chat-33" aria-hidden="true"></i>
+              </div>
+              <h6 class="subtitle">{{ chats }} chats // {{ lines }} lines of dialogue</h6>
+            </div>
+          </div>
+        </div>
+        <div class="row bottom-line">
+          <div class="col-5 ml-auto">
+            <div class="info mt-3">
+              <div class="icon">
+                <i class="nc-icon nc-paper" aria-hidden="true"></i>
+              </div>
+              <h6 class="subtitle">{{ posts }} posts</h6>
+            </div>
+          </div>
+          <div class="col-5 mr-auto">
+            <div class="info mt-3">
+              <div class="icon">
+                <i class="nc-icon nc-bullet-list-67" aria-hidden="true"></i>
+              </div>
+              <h6 class="subtitle">{{ threads }} threads // {{ replies }} replies</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--     *********    END FEATURES 5      *********      -->
+{% endblock %}

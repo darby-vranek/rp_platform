@@ -1,0 +1,24 @@
+{% extends 'shared/template.html' %}
+{% load static %}
+{% block title %}Chats{% endblock %}
+
+<script src='{% static "senpals/assets/js/plugins/jquery.dataTables.min.js" %}'></script>
+
+{% block main %}
+    <div class="team-4 section-image" style="background-image: url('https://images.unsplash.com/photo-1513366208864-87536b8bd7b4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80');">
+        <div class="container">
+            <div class="margin-top"></div>
+            <div class="row">
+                <div class="col-md-8 ml-auto mr-auto text-center">
+                    <h2 class="title">Chats</h2>
+                    <a class="btn btn-outline-info btn-magnify btn-round" href="{% url 'chat-create' %}"><i class="nc-icon nc-simple-add"></i> New</a>
+                    <br />
+                </div>
+            </div>
+            <div class="margin-top"></div>
+            <div class="card mr-auto ml-auto">
+                {% include 'wireframe/chats/subtemplates/chat_list.html' %}
+            </div>
+        </div>
+</div>
+{% endblock %}

@@ -1,0 +1,21 @@
+<div class="card-plain col-md-10 col-xl-8 ml-auto mr-auto mt-5 mb-5 pl-4 pr-4">
+    <form method="post" action="{% url 'reply-create' pk=thread.pk %}">
+        {% csrf_token %}
+        {{ reply_form.thread }}
+        <div class="form-inline m-2">
+            <label class="card-title mr-3" for="id_character">Reply with...</label>
+{#            <label for="id_character">Character:</label>#}
+{#            <select class="form-control ml-2" id="id_character" name="character">#}
+{#                {% include 'senpals/user_character_options.html' %}#}
+{#            </select>#}
+            {{ reply_form.character }}
+        </div>
+        <div class="form-group mt-4">
+            {{ reply_form.text }}
+        </div>
+{#        {{ reply_form.as_p }}#}
+
+
+        <input class="btn btn-sm btn-primary" type="submit" />
+    </form>
+</div>

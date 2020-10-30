@@ -1,0 +1,7 @@
+<tr>
+    <td><strong><a href="{% url 'post-detail' pk=post.pk %}">{{ post.title }}</a></strong></td>
+    <td><a href="{% url 'user-profile' username=user.username  %}"}>{{ user.username }}</a></td>
+    <td>{% if post.character %}<a href="{% url 'character-detail' page_name=post.character.page_name %}">{{ post.character.page_name }}</a>{% endif %}</td>
+    <td>{% if post.verse %}<a href="{% url 'verse-detail' pk=post.verse.pk %}">{{ post.verse }}</a>{% endif %}</td>
+    <td data-order="{{ post.created|date:'ymdhi' }}"><small>{{ post.created }}</small></td>
+</tr>

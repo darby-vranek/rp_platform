@@ -1,0 +1,26 @@
+{% with form=character.get_trait_form %}
+    <div class="ml-3 mr-3">
+        <form method="post" enctype="multipart/form-data" action="{% url 'character-trait-create' page_name=character.page_name %}">
+            {% csrf_token %}
+            <input type="hidden" id="{{ form.character.id_for_label }}" name="{{ form.character.html_name }}" value="{{ character.pk }}" />
+            <div class="form-group">
+                {{ form.verses.errors }}
+                <label for="{{ form.verses.id_for_label }}"><strong>Verse</strong>:</label>
+                {{ form.verses }}
+            </div>
+            <div class="row">
+                <div class="form-group col-4 ml-3">
+                    {{ form.title.errors }}
+                    <label for="{{ form.title.id_for_label }}"><strong>Trait</strong>:</label>
+                    <input type="text" placeholder="e.g. Birthday" class="form-control" id="{{ form.title.id_for_label }}" name="{{ form.title.html_name }}" />
+                </div>
+                <div class="form-group col">
+                    {{ form.value.errors }}
+                    <label for="{{ form.value.id_for_label }}"><strong>Value</strong>:</label>
+                    <input placeholder="e.g. 15 July" type="text" class="form-control" id="{{ form.value.id_for_label }}" name="{{ form.value.html_name }}" />
+                </div>
+            </div>
+            <input class="btn-sm btn btn-primary" type="submit" />
+        </form>
+    </div>
+{% endwith %}

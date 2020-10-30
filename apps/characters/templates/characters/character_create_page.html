@@ -1,0 +1,10 @@
+{% extends "senpals/base.html" %}
+{% block title %}New Character{% endblock %}
+{% block navbar %}{% include "senpals/navbar.html" with nav_title="New Character"%}{% endblock %}
+{% block body %}
+    <div class="card ml-auto mr-auto" style="margin-top: 75px;">
+        <div class="card-body">
+            {% include 'characters/character_create_form.html' %}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,118 @@
+{% extends "senpals/base.html" %}
+{% load static %}
+
+{% block links %}
+    <link href="{% static 'summernote/summernote.css' %}" rel="stylesheet">
+    <script src="{% static 'summernote/summernote-bs4.min.js' %}"></script>
+{% endblock %}
+
+{% block title %}{{ thread.title }}{% endblock %}
+{% block navbar %}{% include "senpals/navbar.html" with nav_title=thread.title %}{% endblock %}
+
+
+{% block body %}
+{#    <hr class="mr-5 ml-5 pr-5 pl-5 mt-5 mb-5" />#}
+    <blockquote class="blockquote mr-5 ml-5 mt-4 text-center">
+        {{ thread.caption }}
+        <footer class="blockquote-footer mb-0 mt-2">
+            {% for character in thread.get_characters %}
+                <a href="{% url 'character-detail' page_name=character.page_name %}">{{ character.page_name }}</a>
+                {% if character != thread.get_characters|last %}
+                    &
+                {% endif %}
+            {% endfor %}
+        </footer>
+        {% if thread.verse %}<div><a class="badge badge-sm badge-primary" href="{% url 'verse-detail' pk=thread.verse.pk %}">{{ thread.verse.name }}</a></div>{% endif %}
+        <div class="ml-auto mr-auto text-center"><a class="" data-toggle="modal" data-target="#updateThread"><i style="font-size: 16px;" class="material-icons">edit</i></a> <a data-toggle="modal" data-target="#confirmDeleteModal"><i style="font-size: 16px;" class="material-icons">delete</i></a></div>
+    </blockquote>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center mt-5" style="margin-bottom: -40px;">
+            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+        </ul>
+    </nav>
+    {% for reply in thread.replies.all %}
+        {% include "threads/reply.html" %}
+    {% endfor %}
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center mb-5" style="margin-top: -40px;">
+            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+        </ul>
+    </nav>
+
+    {% include "threads/reply_create.html" %}
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="updateThread" tabindex="-1" role="dialog" aria-labelledby="updateThreadLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="updateThreadLabel">Edit Thread</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="modal-body">
+                    {% include "threads/thread_update.html" %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmDeleteModalLabel">Are you sure you want to delete this thread?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center pb-0">
+                    <form action="{% url 'thread-delete' pk=thread.pk %}" method="post">
+                        {% csrf_token %}
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <input type="submit" value="delete" class="btn btn-danger" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="deleteReplyModal" tabindex="-1" role="dialog" aria-labelledby="deleteReplyModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteReplyModalLabel">Are you sure you want to delete this reply?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center pb-0">
+                    <form id="deleteReplyForm" method="post">
+                        {% csrf_token %}
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <input type="submit" value="delete" class="btn btn-danger" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $('#deleteReplyModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget) // Button that triggered the modal
+            var reply = button.data('reply') // Extract info from data-* attributes
+            // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+            // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+            var modal = $(this)
+            modal.find('#deleteReplyForm').attr('action', `replies/${reply}/delete/`)
+        })
+    </script>
+{% endblock %}
